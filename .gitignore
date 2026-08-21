@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment - NEVER commit a real .env file
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Log
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Tool caches
+.cache/
+.vite/
+.eslintcache
+.parcel-cache/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker - volume data if bind-mounted into the project directory
+data/mongo/
+
+# WebAssembly (only if the Aufgabe 4 stretch goal gets built)
+target/
+pkg/
+
+# University assignment PDFs - not for a public repo
+Aufgabe/
+
+

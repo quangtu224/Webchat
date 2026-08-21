@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Trang chat - phien ban HTML thuan.
-  Chua co JavaScript: moi thu ban thay deu la HTML + CSS.
+  Chat page - plain HTML version.
+  No JavaScript yet: everything you see here is HTML + CSS.
 -->
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +12,9 @@
   </head>
 
   <body>
-    <!-- ===== KHUNG TONG: chia trang thanh 2 cot ===== -->
+    <!-- ===== APP SHELL: splits the page into two columns ===== -->
     <div class="app">
-      <!-- ===== COT TRAI: danh sach phong ===== -->
+      <!-- ===== LEFT COLUMN: room list ===== -->
       <aside class="sidebar">
         <div class="sidebar__brand">
           <span class="logo">W</span>
@@ -22,9 +22,9 @@
         </div>
 
         <nav class="sidebar__rooms">
-          <h2 class="sidebar__title">Phòng chat</h2>
+          <h2 class="sidebar__title">Rooms</h2>
           <ul>
-            <!-- Phòng đang mở: thêm class "is-active" để CSS tô sáng -->
+            <!-- Currently open room: the "is-active" class drives the highlight -->
             <li><a class="room is-active" href="#">general</a></li>
             <li><a class="room" href="#">wbs-projekt</a></li>
             <li><a class="room" href="#">devops</a></li>
@@ -38,17 +38,17 @@
         </div>
       </aside>
 
-      <!-- ===== COT PHAI: khung chat ===== -->
+      <!-- ===== RIGHT COLUMN: chat pane ===== -->
       <main class="chat">
-        <!-- Thanh tieu de -->
+        <!-- Header bar -->
         <header class="chat__header">
           <h1>#general</h1>
-          <p>Nói chuyện linh tinh</p>
+          <p>Anything and everything</p>
         </header>
 
-        <!-- Danh sach tin nhan -->
+        <!-- Message list -->
         <div class="messages">
-          <!-- Tin nhan cua nguoi khac -->
+          <!-- Someone else's message -->
           <div class="message">
             <span class="avatar">MA</span>
             <div class="message__body">
@@ -56,7 +56,7 @@
                 <span class="message__author">Mai Anh</span>
                 <span class="message__time">09:12</span>
               </div>
-              <p class="bubble">Chào mọi người, hôm nay mình bắt đầu làm giao diện nhé.</p>
+              <p class="bubble">Morning everyone, I'm starting on the UI today.</p>
             </div>
           </div>
 
@@ -68,12 +68,12 @@
                 <span class="message__time">09:13</span>
               </div>
               <p class="bubble">
-                Mình đề xuất chia 2 cột: danh sách phòng bên trái, khung chat bên phải.
+                I'd suggest two columns: room list on the left, chat pane on the right.
               </p>
             </div>
           </div>
 
-          <!-- Tin nhan cua chinh minh: them class "message--me" -->
+          <!-- Own message: add the "message--me" class -->
           <div class="message message--me">
             <span class="avatar avatar--me">QT</span>
             <div class="message__body">
@@ -81,7 +81,7 @@
                 <span class="message__author">Quang Tu</span>
                 <span class="message__time">09:15</span>
               </div>
-              <p class="bubble">Đồng ý. Mình làm bằng HTML và CSS thuần trước đã.</p>
+              <p class="bubble">Agreed. Plain HTML and CSS first.</p>
             </div>
           </div>
 
@@ -92,7 +92,7 @@
                 <span class="message__author">Quang Tu</span>
                 <span class="message__time">09:16</span>
               </div>
-              <p class="bubble">Khi nào giao diện xong thì mới thêm JavaScript.</p>
+              <p class="bubble">JavaScript comes once the layout is done.</p>
             </div>
           </div>
 
@@ -103,15 +103,15 @@
                 <span class="message__author">Sophia</span>
                 <span class="message__time">09:20</span>
               </div>
-              <p class="bubble">Nhớ làm cho đẹp trên điện thoại nữa nhé!</p>
+              <p class="bubble">Don't forget to make it look good on mobile!</p>
             </div>
           </div>
         </div>
 
-        <!-- O nhap tin nhan -->
+        <!-- Message composer -->
         <form class="composer">
-          <input type="text" placeholder="Nhắn tin tới #general" aria-label="Nội dung tin nhắn" />
-          <button type="submit">Gửi</button>
+          <input type="text" placeholder="Message #general" aria-label="Message content" />
+          <button type="submit">Send</button>
         </form>
       </main>
     </div>
