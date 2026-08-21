@@ -1,0 +1,329 @@
+/* ============================================================
+   WEBCHAT - CSS
+   Doc tu tren xuong duoi, moi phan deu co ghi chu.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. BIEN MAU
+   :root la toan bo trang. Khai bao mau o day mot lan,
+   cho duoi dung lai bang var(--ten-bien).
+   Muon doi tone ca trang? Chi can sua o day.
+   ------------------------------------------------------------ */
+:root {
+  --nen-trang: #0f1117; /* nen ngoai cung */
+  --nen-cot-trai: #161922; /* nen sidebar */
+  --nen-o-nhap: #1e222d; /* nen o input, bong bong tin nhan */
+
+  --chu-chinh: #e8eaf0;
+  --chu-phu: #9aa3b5;
+  --chu-mo: #6b7488;
+
+  --mau-nhan: #5b8cff; /* mau chu dao: nut Gui, phong dang mo */
+  --duong-vien: #262b36;
+
+  --bo-goc: 10px;
+}
+
+/* ------------------------------------------------------------
+   2. RESET
+   Trinh duyet co san mot so mac dinh gay phien.
+   Bo chung di truoc khi bat dau.
+   ------------------------------------------------------------ */
+
+/* box-sizing: border-box => padding va border TINH VAO chieu rong.
+   Khong co dong nay, mot o rong 100px + padding 10px se thanh 120px. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh; /* 100vh = cao bang dung man hinh */
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 15px;
+  color: var(--chu-chinh);
+  background: var(--nen-trang);
+}
+
+ul {
+  list-style: none; /* bo dau cham dau moi <li> */
+}
+
+a {
+  text-decoration: none; /* bo gach chan cua link */
+  color: inherit; /* dung mau chu cua cha, khong dung mau xanh mac dinh */
+}
+
+/* ------------------------------------------------------------
+   3. KHUNG TONG - CHIA 2 COT
+   display: flex xep cac con nam CANH NHAU theo hang ngang.
+   ------------------------------------------------------------ */
+.app {
+  display: flex;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------
+   4. COT TRAI (SIDEBAR)
+   ------------------------------------------------------------ */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0; /* khong cho co lai khi man hinh hep */
+  display: flex;
+  flex-direction: column; /* xep cac con TU TREN XUONG */
+  background: var(--nen-cot-trai);
+  border-right: 1px solid var(--duong-vien);
+}
+
+/* --- Logo --- */
+.sidebar__brand {
+  display: flex;
+  align-items: center; /* can giua theo chieu doc */
+  gap: 10px; /* khoang cach giua logo va chu */
+  height: 60px;
+  padding: 0 16px;
+  font-weight: 600;
+  font-size: 17px;
+  border-bottom: 1px solid var(--duong-vien);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--mau-nhan);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* --- Danh sach phong --- */
+.sidebar__rooms {
+  flex: 1; /* an het khoang trong con lai => day phan user xuong day */
+  padding: 12px 8px;
+  overflow-y: auto; /* nhieu phong qua thi cuon */
+}
+
+.sidebar__title {
+  padding: 8px;
+  color: var(--chu-mo);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase; /* bien chu thanh IN HOA */
+  letter-spacing: 0.05em;
+}
+
+.room {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--chu-phu);
+}
+
+/* Them dau # truoc ten phong bang CSS, khong can go trong HTML */
+.room::before {
+  content: '# ';
+  color: var(--chu-mo);
+}
+
+/* :hover = khi ro chuot di qua */
+.room:hover {
+  background: var(--nen-o-nhap);
+  color: var(--chu-chinh);
+}
+
+/* Phong dang mo */
+.room.is-active {
+  background: rgba(91, 140, 255, 0.15);
+  color: var(--mau-nhan);
+}
+
+.room.is-active::before {
+  color: var(--mau-nhan);
+}
+
+/* --- Nguoi dung o duoi cung --- */
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--duong-vien);
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------
+   5. AVATAR (dung chung nhieu cho)
+   ------------------------------------------------------------ */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%; /* 50% => hinh tron */
+  background: #3a4152;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.avatar--me {
+  background: var(--mau-nhan);
+}
+
+/* ------------------------------------------------------------
+   6. COT PHAI (KHUNG CHAT)
+   ------------------------------------------------------------ */
+.chat {
+  flex: 1; /* chiem het phan con lai */
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* meo flexbox: cho phep con ben trong co lai */
+}
+
+/* --- Thanh tieu de --- */
+.chat__header {
+  height: 60px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--duong-vien);
+}
+
+.chat__header h1 {
+  font-size: 17px;
+}
+
+.chat__header p {
+  color: var(--chu-mo);
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------
+   7. TIN NHAN
+   ------------------------------------------------------------ */
+.messages {
+  flex: 1;
+  overflow-y: auto; /* danh sach dai thi cuon, khong day ca trang */
+  padding: 16px 24px;
+}
+
+.message {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.message__body {
+  max-width: 65%; /* tin nhan dai khong keo het chieu ngang */
+}
+
+.message__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.message__author {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.message__time {
+  color: var(--chu-mo);
+  font-size: 11px;
+}
+
+.bubble {
+  padding: 8px 12px;
+  border-radius: var(--bo-goc);
+  background: var(--nen-o-nhap);
+  line-height: 1.5;
+  overflow-wrap: anywhere; /* tu dai khong tran ra ngoai */
+}
+
+/* --- Tin nhan cua chinh minh: dao sang ben phai ---
+   row-reverse dao thu tu cac con trong flexbox.
+   Chi mot dong CSS, khong can viet HTML khac. */
+.message--me {
+  flex-direction: row-reverse;
+}
+
+.message--me .message__meta {
+  flex-direction: row-reverse;
+}
+
+.message--me .bubble {
+  background: var(--mau-nhan);
+  color: #fff;
+}
+
+/* ------------------------------------------------------------
+   8. O NHAP TIN NHAN
+   ------------------------------------------------------------ */
+.composer {
+  display: flex;
+  gap: 8px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--duong-vien);
+}
+
+.composer input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--duong-vien);
+  border-radius: var(--bo-goc);
+  background: var(--nen-o-nhap);
+  color: var(--chu-chinh);
+  font: inherit; /* o input khong tu ke thua font, phai viet ro */
+}
+
+.composer input::placeholder {
+  color: var(--chu-mo);
+}
+
+/* :focus = khi dang go vao o do */
+.composer input:focus {
+  outline: none;
+  border-color: var(--mau-nhan);
+}
+
+.composer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--bo-goc);
+  background: var(--mau-nhan);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer; /* con tro thanh hinh ban tay */
+}
+
+.composer button:hover {
+  background: #7aa2ff;
+}
+
+/* ------------------------------------------------------------
+   9. MAN HINH NHO (DIEN THOAI)
+   Doan CSS ben trong @media chi ap dung khi man hinh <= 720px.
+   ------------------------------------------------------------ */
+@media (max-width: 720px) {
+  .sidebar {
+    display: none; /* an cot trai cho rong cho */
+  }
+
+  .message__body {
+    max-width: 85%;
+  }
+
+  .messages,
+  .composer,
+  .chat__header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
