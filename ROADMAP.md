@@ -22,7 +22,7 @@ automated CI/CD, tested build & container packaging, images pushed to a registry
 
 **Principles throughout**
 
-1. Every phase ends with **one clean commit** and a still-working app. Do not squash three phases into a single commit.
+1. Every phase gets **its own branch and its own pull request**, and `main` is left in a working state after every merge. See [Branching strategy](#2-branching-strategy).
 2. No secrets in Git. Everything comes from environment variables.
 3. Free tooling only — and at minimum, nothing that requires a credit card.
 4. Every phase has a **Definition of Done (DoD)**. Do not move on until it is met.
@@ -116,6 +116,87 @@ Webchat/
 
 ---
 
+## 2. Branching strategy
+
+**One branch per phase, one pull request per phase.** `main` must always be in a working state.
+
+```
+main ────●────────●────────●────────●────►   each ● is one merged phase
+          \      / \      / \      /
+           ●──●─┘   ●──●─┘   ●──●─┘          working commits inside a phase
+        phase/01  phase/02  phase/03
+```
+
+### Branch names
+
+Numbered so they sort in build order:
+
+| Phase | Branch |
+|---|---|
+| 0 | `phase/00-bootstrap` |
+| 1 | `phase/01-rest-polling` |
+| 2 | `phase/02-server-rest` |
+| 3 | `phase/03-websocket` |
+| 4 | `phase/04-typescript-build` |
+| 5 | `phase/05-security` |
+| 6 | `phase/06-testing` |
+| 7 | `phase/07-docker` |
+| 8 | `phase/08-ci` |
+| 9 | `phase/09-cd` |
+| 10 | `phase/10-cv-polish` |
+
+Anything outside the phase plan uses the ordinary prefixes: `fix/…`, `docs/…`, `chore/…`.
+
+### The loop, once per phase
+
+1. Start from an up-to-date `main` — never branch off the previous phase branch:
+
+```bash
+git switch main && git pull
+```
+
+2. Cut the branch:
+
+```bash
+git switch -c phase/01-rest-polling
+```
+
+3. Work. Commit in small steps as you go — several commits per phase is correct, not messy. Follow the commit conventions at the bottom of this file.
+
+4. Push and open a PR against `main`:
+
+```bash
+git push -u origin phase/01-rest-polling
+```
+
+5. Before merging, check the phase's **Definition of Done**. That is what the DoD is for — it is the review checklist for your own PR.
+
+6. Merge with `--no-ff` (see below), then clean up:
+
+```bash
+git switch main && git pull && git branch -d phase/01-rest-polling
+```
+
+7. Tick the phase off in the progress tracker below.
+
+### Merge with a merge commit, not squash
+
+On GitHub choose **"Create a merge commit"**, not "Squash and merge". Reason: it keeps one merge commit per phase on `main`, so
+
+```bash
+git log --first-parent main --oneline
+```
+
+prints exactly one line per phase — a clean, readable project timeline — while the detailed commits stay reachable inside each phase. Squashing throws away the working history that shows *how* you built it, which is a large part of what makes a portfolio repo interesting to read.
+
+### Notes
+
+- From Phase 8 onward CI runs automatically on every PR, so the branch-per-phase habit starts paying for itself there. Setting it up now means nothing has to change later.
+- If a phase drags on and `main` moves ahead, rebase onto it: `git switch phase/0X-… && git rebase main`.
+- Only rebase branches nobody else has pulled. Once a branch is shared, merge instead.
+
+---
+
 ## Phase 0 — Project bootstrap ✅ (already set up for you)
 
 **Goal:** a clean repo with conventions in place, ready to code in.
@@ -124,23 +205,35 @@ Already created: `ROADMAP.md`, `.gitignore`, `.editorconfig`, `.nvmrc`, `.env.ex
 
 **Your steps:**
 
-1. Move the existing files into `client/`:
+1. Cut the branch (see the branching strategy above):
+
+```bash
+git switch main && git pull && git switch -c phase/00-bootstrap
+```
+
+2. Move the existing files into `client/`:
 
 ```bash
 mkdir -p client/css && git mv index.html client/index.html && git mv css/style.css client/css/style.css
 ```
 
-2. Create the two packages:
+3. Create the two packages:
 
 ```bash
 cd client && npm init -y && cd ../server && npm init -y && cd ..
 ```
 
-3. Commit:
+4. Commit and push:
 
 ```bash
 git add -A && git commit -m "chore: restructure project into client/ and server/"
 ```
+
+```bash
+git push -u origin phase/00-bootstrap
+```
+
+5. Open a PR against `main`, check the DoD below, merge with a merge commit, then delete the branch.
 
 **DoD:** `git status` is clean; opening `client/index.html` in a browser still shows the same UI.
 
@@ -402,19 +495,19 @@ Only touch these once Phases 0–10 are done. A working build beats a pile of ha
 
 ## Progress tracker
 
-| Phase | Topic | Status |
-|---|---|---|
-| 0 | Project bootstrap | ⬜ |
-| 1 | Static client + REST polling | ⬜ |
-| 2 | Express + MongoDB + REST | ⬜ |
-| 3 | WebSocket realtime | ⬜ |
-| 4 | TypeScript + build | ⬜ |
-| 5 | Security (XSS) | ⬜ |
-| 6 | Testing | ⬜ |
-| 7 | Docker + nginx | ⬜ |
-| 8 | CI (GitHub Actions) | ⬜ |
-| 9 | CD (deployment) | ⬜ |
-| 10 | CV polish | ⬜ |
+| Phase | Topic | Branch | Status |
+|---|---|---|---|
+| 0 | Project bootstrap | `phase/00-bootstrap` | ⬜ |
+| 1 | Static client + REST polling | `phase/01-rest-polling` | ⬜ |
+| 2 | Express + MongoDB + REST | `phase/02-server-rest` | ⬜ |
+| 3 | WebSocket realtime | `phase/03-websocket` | ⬜ |
+| 4 | TypeScript + build | `phase/04-typescript-build` | ⬜ |
+| 5 | Security (XSS) | `phase/05-security` | ⬜ |
+| 6 | Testing | `phase/06-testing` | ⬜ |
+| 7 | Docker + nginx | `phase/07-docker` | ⬜ |
+| 8 | CI (GitHub Actions) | `phase/08-ci` | ⬜ |
+| 9 | CD (deployment) | `phase/09-cd` | ⬜ |
+| 10 | CV polish | `phase/10-cv-polish` | ⬜ |
 
 ---
 
