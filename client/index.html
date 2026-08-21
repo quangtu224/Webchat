@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Chat page - plain HTML version.
-  No JavaScript yet: everything you see here is HTML + CSS.
+  Chat page - static shell.
+  The message list is empty on purpose: src/ui.ts fills it at runtime.
 -->
 <html lang="en">
   <head>
@@ -48,64 +48,7 @@
 
         <!-- Message list -->
         <div class="messages">
-          <!-- Someone else's message -->
-          <div class="message">
-            <span class="avatar">MA</span>
-            <div class="message__body">
-              <div class="message__meta">
-                <span class="message__author">Mai Anh</span>
-                <span class="message__time">09:12</span>
-              </div>
-              <p class="bubble">Morning everyone, I'm starting on the UI today.</p>
-            </div>
-          </div>
-
-          <div class="message">
-            <span class="avatar">L</span>
-            <div class="message__body">
-              <div class="message__meta">
-                <span class="message__author">Lukas</span>
-                <span class="message__time">09:13</span>
-              </div>
-              <p class="bubble">
-                I'd suggest two columns: room list on the left, chat pane on the right.
-              </p>
-            </div>
-          </div>
-
-          <!-- Own message: add the "message--me" class -->
-          <div class="message message--me">
-            <span class="avatar avatar--me">QT</span>
-            <div class="message__body">
-              <div class="message__meta">
-                <span class="message__author">Quang Tu</span>
-                <span class="message__time">09:15</span>
-              </div>
-              <p class="bubble">Agreed. Plain HTML and CSS first.</p>
-            </div>
-          </div>
-
-          <div class="message message--me">
-            <span class="avatar avatar--me">QT</span>
-            <div class="message__body">
-              <div class="message__meta">
-                <span class="message__author">Quang Tu</span>
-                <span class="message__time">09:16</span>
-              </div>
-              <p class="bubble">JavaScript comes once the layout is done.</p>
-            </div>
-          </div>
-
-          <div class="message">
-            <span class="avatar">S</span>
-            <div class="message__body">
-              <div class="message__meta">
-                <span class="message__author">Sophia</span>
-                <span class="message__time">09:20</span>
-              </div>
-              <p class="bubble">Don't forget to make it look good on mobile!</p>
-            </div>
-          </div>
+          <!-- Rendered by src/ui.ts -->
         </div>
 
         <!-- Message composer -->
@@ -115,5 +58,7 @@
         </form>
       </main>
     </div>
+
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
