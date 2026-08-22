@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext"],
+    "types": ["node"],
+
+    /* tsx chạy TypeScript trực tiếp; tsc chỉ kiểm tra kiểu. */
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+
+    /* Phase 4 siết chặt thêm. */
+    "strict": true
+  },
+  "include": ["src"]
+}
