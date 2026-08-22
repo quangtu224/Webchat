@@ -25,7 +25,7 @@ const inputEl = requireElement<HTMLInputElement>('.composer input')
 
 async function refresh(): Promise<void> {
   try {
-    const messages = await getMessages()
+    const messages = await getMessages(CURRENT_ROOM)
     renderMessages(messagesEl, messages, CURRENT_USER)
   } catch (error) {
     // Server chết không được làm sập cả trang: lần polling sau vẫn chạy.

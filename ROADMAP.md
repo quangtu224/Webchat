@@ -497,9 +497,9 @@ Only touch these once Phases 0–10 are done. A working build beats a pile of ha
 
 | Phase | Topic | Branch | Status |
 |---|---|---|---|
-| 0 | Project bootstrap | `phase/00-bootstrap` | ⬜ |
-| 1 | Static client + REST polling | `phase/01-rest-polling` | ⬜ |
-| 2 | Express + MongoDB + REST | `phase/02-server-rest` | ⬜ |
+| 0 | Project bootstrap | `phase/00-bootstrap` | ✅ |
+| 1 | Static client + REST polling | `phase/01-rest-polling` | ✅ |
+| 2 | Express + MongoDB + REST | `phase/02-server-rest` | ✅ |
 | 3 | WebSocket realtime | `phase/03-websocket` | ⬜ |
 | 4 | TypeScript + build | `phase/04-typescript-build` | ⬜ |
 | 5 | Security (XSS) | `phase/05-security` | ⬜ |
